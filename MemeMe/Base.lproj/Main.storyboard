@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="height" constant="40" id="h7E-uU-xDJ"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Share" id="kUO-zA-Qbe"/>
+                                    <barButtonItem title="Item" style="plain" id="kUO-zA-Qbe"/>
                                 </items>
                             </toolbar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jnh-m5-Bgd" userLabel="DownToolbar">
@@ -41,6 +41,11 @@
                                     <barButtonItem systemItem="camera" id="aKo-c4-3wB">
                                         <connections>
                                             <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="wfO-ol-gra"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="save" id="4an-5N-led">
+                                        <connections>
+                                            <action selector="save:" destination="BYZ-38-t0r" id="M4Y-u3-C8n"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -66,7 +71,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Hd-iI-i8M" userLabel="BottomView">
                                 <rect key="frame" x="0.0" y="722" width="414" height="100"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="UyH-fh-jBc" userLabel="BottomTextField">
+                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="UyH-fh-jBc" userLabel="BottomTextField">
                                         <rect key="frame" x="117" y="26" width="180" height="48"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="textColor"/>
@@ -114,14 +119,16 @@
                         <outlet property="bottomTextField" destination="UyH-fh-jBc" id="DAq-2f-vz8"/>
                         <outlet property="bottomView" destination="7Hd-iI-i8M" id="IYx-Ud-70a"/>
                         <outlet property="cameraButton" destination="aKo-c4-3wB" id="rvP-WY-4Xg"/>
+                        <outlet property="downToolBar" destination="jnh-m5-Bgd" id="Ypq-wd-gy3"/>
                         <outlet property="pickerImage" destination="SCQ-Vm-Rdn" id="V3K-tp-csy"/>
                         <outlet property="topTextField" destination="5rM-oz-Hzd" id="9NV-Es-EAl"/>
+                        <outlet property="topToolbar" destination="7TT-v1-Qez" id="xlN-x1-PgH"/>
                         <outlet property="topView" destination="Mdq-MR-cou" id="hSv-to-fIR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-255.07246376811597" y="103.79464285714285"/>
+            <point key="canvasLocation" x="-1575" y="-43"/>
         </scene>
     </scenes>
 </document>
