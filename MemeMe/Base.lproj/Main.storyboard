@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TT-v1-Qez" userLabel="TopToolbar">
+                                <rect key="frame" x="0.0" y="44" width="414" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="h7E-uU-xDJ"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Share" id="kUO-zA-Qbe"/>
+                                </items>
+                            </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jnh-m5-Bgd" userLabel="DownToolbar">
+                                <rect key="frame" x="0.0" y="822" width="414" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="aZv-vJ-L4H"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Album" id="KB1-XB-cuF">
+                                        <connections>
+                                            <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="rcG-1I-mJQ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="camera" id="aKo-c4-3wB">
+                                        <connections>
+                                            <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="wfO-ol-gra"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mdq-MR-cou" userLabel="TopView">
+                                <rect key="frame" x="0.0" y="84" width="414" height="100"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="5rM-oz-Hzd" userLabel="TopTextField">
+                                        <rect key="frame" x="163.5" y="26" width="87" height="48"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="WcO-BJ-htA"/>
+                                    <constraint firstItem="5rM-oz-Hzd" firstAttribute="centerX" secondItem="Mdq-MR-cou" secondAttribute="centerX" id="uoP-FF-Daj"/>
+                                    <constraint firstItem="5rM-oz-Hzd" firstAttribute="centerY" secondItem="Mdq-MR-cou" secondAttribute="centerY" id="yMi-36-ho0"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Hd-iI-i8M" userLabel="BottomView">
+                                <rect key="frame" x="0.0" y="722" width="414" height="100"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="UyH-fh-jBc" userLabel="BottomTextField">
+                                        <rect key="frame" x="117" y="26" width="180" height="48"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="GeM-8a-Dsn"/>
+                                    <constraint firstItem="UyH-fh-jBc" firstAttribute="centerX" secondItem="7Hd-iI-i8M" secondAttribute="centerX" id="RBi-2o-jzd"/>
+                                    <constraint firstItem="UyH-fh-jBc" firstAttribute="centerY" secondItem="7Hd-iI-i8M" secondAttribute="centerY" id="Rsj-75-yoD"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SCQ-Vm-Rdn">
+                                <rect key="frame" x="0.0" y="84" width="414" height="738"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Mdq-MR-cou" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="08L-39-mFG"/>
+                            <constraint firstItem="Mdq-MR-cou" firstAttribute="top" secondItem="7TT-v1-Qez" secondAttribute="bottom" id="36p-uV-d7M"/>
+                            <constraint firstItem="Mdq-MR-cou" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4VB-26-TdG"/>
+                            <constraint firstItem="7TT-v1-Qez" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9R8-Y8-znP"/>
+                            <constraint firstItem="7Hd-iI-i8M" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="G2O-xA-6FG"/>
+                            <constraint firstItem="7Hd-iI-i8M" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LMk-hg-qsK"/>
+                            <constraint firstItem="SCQ-Vm-Rdn" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="PdO-vc-KV4"/>
+                            <constraint firstItem="7Hd-iI-i8M" firstAttribute="bottom" secondItem="jnh-m5-Bgd" secondAttribute="top" id="S6N-P6-Isw"/>
+                            <constraint firstItem="SCQ-Vm-Rdn" firstAttribute="top" secondItem="7TT-v1-Qez" secondAttribute="bottom" id="SlE-Sp-CZC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SCQ-Vm-Rdn" secondAttribute="bottom" constant="40" id="URY-Uz-Nl2"/>
+                            <constraint firstItem="Mdq-MR-cou" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XpA-M0-vuK"/>
+                            <constraint firstItem="SCQ-Vm-Rdn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YIH-Ob-74X"/>
+                            <constraint firstItem="7Hd-iI-i8M" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZOx-5q-bN2"/>
+                            <constraint firstItem="7TT-v1-Qez" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gQc-GR-hYs"/>
+                            <constraint firstItem="jnh-m5-Bgd" firstAttribute="top" secondItem="SCQ-Vm-Rdn" secondAttribute="bottom" id="ijZ-V1-nXr"/>
+                            <constraint firstItem="jnh-m5-Bgd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="msB-2S-IH1"/>
+                            <constraint firstItem="7TT-v1-Qez" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ugf-vF-4vj"/>
+                            <constraint firstItem="jnh-m5-Bgd" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="vF8-xM-bxc"/>
+                            <constraint firstItem="SCQ-Vm-Rdn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vUQ-oc-Sg4"/>
+                            <constraint firstItem="jnh-m5-Bgd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="yI1-gk-mEc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="bottomTextField" destination="UyH-fh-jBc" id="DAq-2f-vz8"/>
+                        <outlet property="bottomView" destination="7Hd-iI-i8M" id="IYx-Ud-70a"/>
+                        <outlet property="cameraButton" destination="aKo-c4-3wB" id="rvP-WY-4Xg"/>
+                        <outlet property="pickerImage" destination="SCQ-Vm-Rdn" id="V3K-tp-csy"/>
+                        <outlet property="topTextField" destination="5rM-oz-Hzd" id="9NV-Es-EAl"/>
+                        <outlet property="topView" destination="Mdq-MR-cou" id="hSv-to-fIR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-255.07246376811597" y="103.79464285714285"/>
+        </scene>
+    </scenes>
+</document>
