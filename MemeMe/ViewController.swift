@@ -102,8 +102,6 @@ class ViewController: UIViewController {
     func generateMemedImage() -> UIImage {
         topToolbar.isHidden = true
         downToolBar.isHidden = true
-        print("top= \( topToolbar.isHidden)")
-        print("down = \(downToolBar.isHidden)")
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -113,8 +111,7 @@ class ViewController: UIViewController {
     
         topToolbar.isHidden = false
         downToolBar.isHidden = false
-        print("top= \( topToolbar.isHidden)")
-        print("down = \(downToolBar.isHidden)")
+
         return memedImage
     }
     
@@ -136,7 +133,6 @@ class ViewController: UIViewController {
     @IBAction func shareAction(_ sender: Any) {
         if let image = pickerImage.image {
             let memedImage = self.generateMemedImage()
-            
             let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
             activityController.completionWithItemsHandler = {
                 (activity, success, items, error) in
