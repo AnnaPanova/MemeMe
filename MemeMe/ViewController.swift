@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var downToolBar: UIToolbar!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    
     
     let textFieldAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor : UIColor.black,
@@ -27,10 +29,12 @@ class ViewController: UIViewController {
     ]
     
     let custumDelegate = CustomTextFieldDelegate()
+   // var meme: Meme?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        shareButton.isEnabled = false
         
         topTextField.delegate = custumDelegate
         bottomTextField.delegate = custumDelegate
@@ -95,18 +99,6 @@ class ViewController: UIViewController {
         self.view.frame.origin.y = 0.0
     }
     
-    @IBAction func save(_ sender: Any) {
-        if let image = pickerImage.image {
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: image, memedImage: generateMemedImage())
-        } else {
-            let allertController = UIAlertController(title: "Problem with creating Meme", message: "Picture is absent", preferredStyle: .alert)
-            let action = UIAlertAction(title:"OK", style: .default, handler: nil)
-            allertController.addAction(action)
-            present(allertController, animated: true)
-            print("Error: IMAGE!")
-        }
-    }
-    
     func generateMemedImage() -> UIImage {
         topToolbar.isHidden = true
         downToolBar.isHidden = true
@@ -139,11 +131,36 @@ class ViewController: UIViewController {
              bottomTextField.text = "BOTTOM"
         }
     }
+   
+    
+    @IBAction func shareAction(_ sender: Any) {
+        if let image = pickerImage.image {
+            let memedImage = self.generateMemedImage()
+            
+            let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+            activityController.completionWithItemsHandler = {
+                (activity, success, items, error) in
+                if(success && error == nil){
+                    // Save the Meme
+                    let meme = Meme(topText: self.topTextField.text!, bottomText: self.bottomTextField.text!, originalImage: image, memedImage:memedImage)
+                     print("SAVED")
+                    self.dismiss(animated: true, completion: nil);
+                }
+                else if (error != nil){
+                    print(error)
+                }
+            }
+            present(activityController, animated: true, completion: nil)
+        } else {
+    let allertController = UIAlertController(title: "Problem with creating Meme", message: "Picture is absent", preferredStyle: .alert)
+    let action = UIAlertAction(title:"OK", style: .default, handler: nil)
+    allertController.addAction(action)
+    present(allertController, animated: true)
+        }
+    }
+    
     
 }
-    
-    
-   
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -152,6 +169,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             self.pickerImage.image = image
         }
         dismiss(animated: true, completion: nil)
+        shareButton.isEnabled = true
     }
     
 }

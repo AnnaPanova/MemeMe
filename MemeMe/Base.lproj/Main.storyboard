@@ -24,7 +24,11 @@
                                     <constraint firstAttribute="height" constant="40" id="h7E-uU-xDJ"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Item" style="plain" id="kUO-zA-Qbe"/>
+                                    <barButtonItem style="plain" systemItem="action" id="kUO-zA-Qbe" userLabel="ShareButton">
+                                        <connections>
+                                            <action selector="shareAction:" destination="BYZ-38-t0r" id="KIK-4j-UP4"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jnh-m5-Bgd" userLabel="DownToolbar">
@@ -41,11 +45,6 @@
                                     <barButtonItem systemItem="camera" id="aKo-c4-3wB">
                                         <connections>
                                             <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="wfO-ol-gra"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem systemItem="save" id="4an-5N-led">
-                                        <connections>
-                                            <action selector="save:" destination="BYZ-38-t0r" id="M4Y-u3-C8n"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -121,6 +120,7 @@
                         <outlet property="cameraButton" destination="aKo-c4-3wB" id="rvP-WY-4Xg"/>
                         <outlet property="downToolBar" destination="jnh-m5-Bgd" id="Ypq-wd-gy3"/>
                         <outlet property="pickerImage" destination="SCQ-Vm-Rdn" id="V3K-tp-csy"/>
+                        <outlet property="shareButton" destination="kUO-zA-Qbe" id="uFc-CY-Waf"/>
                         <outlet property="topTextField" destination="5rM-oz-Hzd" id="9NV-Es-EAl"/>
                         <outlet property="topToolbar" destination="7TT-v1-Qez" id="xlN-x1-PgH"/>
                         <outlet property="topView" destination="Mdq-MR-cou" id="hSv-to-fIR"/>
