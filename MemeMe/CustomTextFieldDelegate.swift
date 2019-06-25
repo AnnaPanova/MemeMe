@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
-
+    
     var topEditedText: String?
     var bottomEditedText: String?
     
@@ -34,5 +34,5 @@ class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
         }
         return true
     }
-
+    
 }
