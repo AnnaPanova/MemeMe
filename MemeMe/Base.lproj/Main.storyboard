@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Impact.ttf">
+            <string>Impact</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -30,6 +35,12 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="FCV-ul-ndW"/>
+                                    <barButtonItem title="Сhoose the font" id="MYU-Aw-V2b">
+                                        <connections>
+                                            <action selector="chooseFont:" destination="BYZ-38-t0r" id="5Vr-GK-74M"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="w76-Gu-TSa"/>
                                     <barButtonItem systemItem="cancel" id="zjh-qo-92h">
                                         <connections>
                                             <action selector="cancelAction:" destination="BYZ-38-t0r" id="Umc-kf-V9h"/>
@@ -38,13 +49,13 @@
                                 </items>
                             </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mdq-MR-cou" userLabel="TopView">
-                                <rect key="frame" x="0.0" y="84" width="414" height="100"/>
+                                <rect key="frame" x="0.0" y="84" width="414" height="101"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="5rM-oz-Hzd" userLabel="TopTextField">
-                                        <rect key="frame" x="0.0" y="26" width="414" height="48"/>
+                                        <rect key="frame" x="0.0" y="26" width="414" height="49"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
+                                        <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="40"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                     </textField>
                                 </subviews>
@@ -57,13 +68,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Hd-iI-i8M" userLabel="BottomView">
-                                <rect key="frame" x="0.0" y="722" width="414" height="100"/>
+                                <rect key="frame" x="0.0" y="721" width="414" height="101"/>
                                 <subviews>
                                     <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="UyH-fh-jBc" userLabel="BottomTextField">
-                                        <rect key="frame" x="0.0" y="26" width="414" height="48"/>
+                                        <rect key="frame" x="0.0" y="26" width="414" height="49"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
+                                        <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="40"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                     </textField>
                                 </subviews>

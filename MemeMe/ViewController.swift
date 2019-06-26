@@ -30,13 +30,6 @@ class ViewController: UIViewController {
         topTextField.delegate = custumDelegate
         bottomTextField.delegate = custumDelegate
         
-        view.addSubview(bottomView)
-        view.addSubview(topView)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
         // set center alignment for textFields
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
@@ -44,13 +37,20 @@ class ViewController: UIViewController {
         let textFieldAttributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.strokeColor : UIColor.black,
             NSAttributedString.Key.foregroundColor : UIColor.white,
-            NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSAttributedString.Key.font : UIFontMetrics.default.scaledFont(for: UIFont(name: "Impact", size: 40.0)!),
             NSAttributedString.Key.strokeWidth : -3.0,
             NSAttributedString.Key.paragraphStyle: paragraph
         ]
         
         topTextField.defaultTextAttributes = textFieldAttributes
         bottomTextField.defaultTextAttributes = textFieldAttributes
+        
+        view.addSubview(bottomView)
+        view.addSubview(topView)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
         chekingTextFields()
         subscribeToKeyBoardNotification()
@@ -163,6 +163,37 @@ class ViewController: UIViewController {
         bottomTextField.text = "BOTTOM"
         pickerImage.image = nil
         shareButton.isEnabled = false
+    }
+    
+    // MARK: Choose the Font Action
+    @IBAction func chooseFont(_ sender: Any) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let helveticaFontAction = UIAlertAction(title: "Helvetica Neue", style: .default) { action in
+            self.topTextField.font = UIFont(name: "HelveticaNeue-CondensedBlack", size: 40.0)!
+            self.bottomTextField.font = UIFont(name: "HelveticaNeue-CondensedBlack", size: 40.0)!
+        }
+        let markerFeltFontAction = UIAlertAction(title: "Marker Felt", style: .default) { action in
+            self.topTextField.font = UIFont(name: "Marker Felt", size: 40.0)!
+            self.bottomTextField.font = UIFont(name: "Marker Felt", size: 40.0)!
+        }
+        let partyLetFontAction = UIAlertAction(title: "Party Let", style: .default) { action in
+            self.topTextField.font = UIFont(name: "Party Let", size: 40.0)!
+            self.bottomTextField.font = UIFont(name: "Party Let", size: 40.0)!
+            
+        }
+        let zapfinoFontAction = UIAlertAction(title: "Zapfino", style: .default) { action in
+            self.topTextField.font = UIFont(name: "Zapfino", size: 20.0)!
+            self.bottomTextField.font = UIFont(name: "Zapfino", size: 20.0)!
+        }
+        
+        alertController.addAction(helveticaFontAction)
+        alertController.addAction(markerFeltFontAction)
+        alertController.addAction(partyLetFontAction)
+        alertController.addAction(zapfinoFontAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
     }
 }
 
