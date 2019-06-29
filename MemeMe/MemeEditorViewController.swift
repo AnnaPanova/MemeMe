@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MemeEditorViewController: UIViewController {
     
     @IBOutlet weak var pickerImage: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var bottomToolBar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var topChooseTheFontButton: UIBarButtonItem!
+    @IBOutlet weak var bottomChooseTheFontButton: UIBarButtonItem!
     
     let custumDelegate = CustomTextFieldDelegate()
     
@@ -26,24 +28,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         shareButton.isEnabled = false
+        chooseTheFontIsEnabled()
         
         topTextField.delegate = custumDelegate
         bottomTextField.delegate = custumDelegate
         
-        // set center alignment for textFields
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = .center
-        
-        let textFieldAttributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.strokeColor : UIColor.black,
-            NSAttributedString.Key.foregroundColor : UIColor.white,
-            NSAttributedString.Key.font : UIFontMetrics.default.scaledFont(for: UIFont(name: "Impact", size: 40.0)!),
-            NSAttributedString.Key.strokeWidth : -3.0,
-            NSAttributedString.Key.paragraphStyle: paragraph
-        ]
-        
-        topTextField.defaultTextAttributes = textFieldAttributes
-        bottomTextField.defaultTextAttributes = textFieldAttributes
+        configureTextFields(topTextField, with: "TOP")
+        configureTextFields(bottomTextField, with: "BOTTOM")
         
         view.addSubview(bottomView)
         view.addSubview(topView)
@@ -51,8 +42,8 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
         chekingTextFields()
+        chooseTheFontIsEnabled()
         subscribeToKeyBoardNotification()
     }
     
@@ -61,22 +52,16 @@ class ViewController: UIViewController {
         unsubscribeFromKeyboardNotifications()
     }
     
-    // MARK: Pick an Image from Album
-    @IBAction func pickAnImageFromAlbum(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .photoLibrary
-        present(pickerController, animated: true, completion: nil)
+    // MARK: Pick an Image
+    @IBAction func pickAnImage(_ sender: UIBarButtonItem) {
+        let source = UIImagePickerController()
+        if sender.tag == 0 {
+            source.sourceType = .photoLibrary
+        } else {
+            source.sourceType = .camera
+        }
+        pickAnImageFromSource(from: source.sourceType)
     }
-    
-    // MARK: Pick an Image from Camera
-    @IBAction func pickAnImageFromCamera(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .camera
-        present(pickerController, animated: true, completion: nil)
-    }
-    
     
     func subscribeToKeyBoardNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -90,8 +75,9 @@ class ViewController: UIViewController {
     
     // Moving the entire view up to keep the bottomTextField on screen
     @objc func keyboardWillShow(_ notification: Notification) {
+        chooseTheFontIsEnabled()
         if bottomTextField.isEditing {
-            view.frame.origin.y -= getKeyboardHeight(notification)
+            self.view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
     
@@ -104,12 +90,13 @@ class ViewController: UIViewController {
     // Moving the entire view down
     @objc func keyboardWillHide(_ notification: Notification) {
         self.view.frame.origin.y = 0.0
+        self.topChooseTheFontButton.isEnabled = false
+        self.bottomChooseTheFontButton.isEnabled = false
     }
     
     //MARK: Generate Memed Image
     func generateMemedImage() -> UIImage {
-        topToolbar.isHidden = true
-        bottomToolBar.isHidden = true
+        hideOrShowToolBars(shouldHide: true)
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -117,10 +104,13 @@ class ViewController: UIViewController {
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        topToolbar.isHidden = false
-        bottomToolBar.isHidden = false
-        
+        hideOrShowToolBars(shouldHide: false)
         return memedImage
+    }
+    
+    func hideOrShowToolBars(shouldHide: Bool) {
+        topToolbar.isHidden = shouldHide
+        bottomToolBar.isHidden = shouldHide
     }
     
     func chekingTextFields() {
@@ -129,7 +119,6 @@ class ViewController: UIViewController {
         } else {
             topTextField.text = "TOP"
         }
-        
         if custumDelegate.bottomEditedText != nil {
             bottomTextField.text = custumDelegate.bottomEditedText
         } else {
@@ -159,32 +148,37 @@ class ViewController: UIViewController {
     
     // MARK: Cancel Action
     @IBAction func cancelAction(_ sender: Any) {
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
+        custumDelegate.topEditedText = nil
+        custumDelegate.bottomEditedText = nil
+        configureTextFields(topTextField, with: "TOP")
+        configureTextFields(bottomTextField, with: "BOTTOM")
         pickerImage.image = nil
         shareButton.isEnabled = false
+        chooseTheFontIsEnabled()
     }
     
     // MARK: Choose the Font Action
     @IBAction func chooseFont(_ sender: Any) {
+        let fontDict: [String: UIFont] = [
+            "Helvetica Neue": UIFont(name: "HelveticaNeue-CondensedBlack", size: 40.0)!,
+            "Marker Felt" : UIFont(name: "Marker Felt", size: 40.0)!,
+            "Party Let" : UIFont(name: "Party Let", size: 40.0)!,
+            "Zapfino": UIFont(name: "Zapfino", size: 20.0)!
+        ]
+        
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let helveticaFontAction = UIAlertAction(title: "Helvetica Neue", style: .default) { action in
-            self.topTextField.font = UIFont(name: "HelveticaNeue-CondensedBlack", size: 40.0)!
-            self.bottomTextField.font = UIFont(name: "HelveticaNeue-CondensedBlack", size: 40.0)!
+            self.setFont(font: fontDict["Helvetica Neue"]!)
         }
         let markerFeltFontAction = UIAlertAction(title: "Marker Felt", style: .default) { action in
-            self.topTextField.font = UIFont(name: "Marker Felt", size: 40.0)!
-            self.bottomTextField.font = UIFont(name: "Marker Felt", size: 40.0)!
+            self.setFont(font: fontDict["Marker Felt"]!)
         }
         let partyLetFontAction = UIAlertAction(title: "Party Let", style: .default) { action in
-            self.topTextField.font = UIFont(name: "Party Let", size: 40.0)!
-            self.bottomTextField.font = UIFont(name: "Party Let", size: 40.0)!
-            
+            self.setFont(font: fontDict["Party Let"]!)
         }
         let zapfinoFontAction = UIAlertAction(title: "Zapfino", style: .default) { action in
-            self.topTextField.font = UIFont(name: "Zapfino", size: 20.0)!
-            self.bottomTextField.font = UIFont(name: "Zapfino", size: 20.0)!
+            self.setFont(font: fontDict["Zapfino"]!)
         }
         
         alertController.addAction(helveticaFontAction)
@@ -193,11 +187,56 @@ class ViewController: UIViewController {
         alertController.addAction(zapfinoFontAction)
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func setFont(font: UIFont) {
+        if topTextField.isEditing == true {
+            self.topTextField.font = font
+            self.topTextField.resignFirstResponder()
+        } else if bottomTextField.isEditing == true {
+            self.bottomTextField.font = font
+            self.bottomTextField.resignFirstResponder()
+        }
+    }
+    
+    // MARK: Configure textFields
+    func configureTextFields(_ textField: UITextField, with defaultText: String) {
+        // set center alignment for textFields
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
         
+        let textFieldAttributes: [NSAttributedString.Key: Any] = [
+            .strokeColor : UIColor.black,
+            .foregroundColor : UIColor.white,
+            .font : UIFontMetrics.default.scaledFont(for: UIFont(name: "Impact", size: 40.0)!),
+            .strokeWidth : -3.0,
+            .paragraphStyle: paragraph
+        ]
+        textField.defaultTextAttributes = textFieldAttributes
+        textField.text = defaultText
+    }
+    
+    // MARK: Pick an image from source
+    func pickAnImageFromSource(from source: UIImagePickerController.SourceType) {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.sourceType = source
+        present(pickerController, animated: true, completion: nil)
+    }
+    
+    // MARK: Choose the font isHidden
+    func chooseTheFontIsEnabled() {
+        topChooseTheFontButton.isEnabled = false
+        bottomChooseTheFontButton.isEnabled = false
+        if topTextField.isEditing {
+            topChooseTheFontButton.isEnabled = true
+        } else if bottomTextField.isEditing {
+            bottomChooseTheFontButton.isEnabled = true
+        }
     }
 }
 
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
@@ -206,6 +245,8 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         dismiss(animated: true, completion: nil)
         shareButton.isEnabled = true
     }
-    
 }
+
+
+
 

@@ -6,7 +6,6 @@
 //  Copyright © 2019 Anna. All rights reserved.
 //
 
-import Foundation
 import UIKit
 class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
     
